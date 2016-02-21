@@ -35,9 +35,8 @@ ENV COMPOSER_HOME /root/composer
 VOLUME ["/app"]
 WORKDIR /app
 
-ENV COMPOSER_VERSION master
-
 # Install Composer
+ENV COMPOSER_VERSION master
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 ENTRYPOINT ["/usr/local/bin/composer"]
