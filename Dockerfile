@@ -19,7 +19,7 @@ RUN apt-get install -q -y curl
 RUN apt-get install -q -y git
 RUN apt-get install -q -y subversion
 RUN apt-get install -q -y unzip
-RUN rm -r /var/lib/apt/lists/*
+RUN apt-get clean && rm -r /var/lib/apt/lists/*
 
 # PHP Extensions and configurations
 RUN docker-php-ext-install mcrypt zip bz2 mbstring
@@ -39,3 +39,5 @@ ENV COMPOSER_VERSION master
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+ENTRYPOINT ["/usr/local/bin/composer"]
