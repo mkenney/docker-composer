@@ -34,6 +34,7 @@ ENV COMPOSER_HOME /root/composer
 # Set up the application directory
 VOLUME ["/app"]
 WORKDIR /app
+ENV TERM xterm
 
 # Install Composer
 ENV COMPOSER_VERSION master
