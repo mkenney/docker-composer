@@ -1,4 +1,4 @@
 #!/bin/sh
 
-docker run --rm -t -v $(pwd):/src:rw mkenney/composer $@
+docker run --rm -t -v $(pwd):/src:rw $HOME/.ssh:/home/dev/.ssh:ro mkenney/composer $@
 
