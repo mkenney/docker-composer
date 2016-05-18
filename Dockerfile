@@ -6,7 +6,6 @@ MAINTAINER Michael Kenney <mkenney@webbedlam.com>
 # composer
 ##############################################################################
 
-COPY container /container
 ENV COMPOSER_HOME /root/composer
 ENV COMPOSER_VERSION master
 RUN mkdir /home/dev/composer \
