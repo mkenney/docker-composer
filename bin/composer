@@ -1,4 +1,4 @@
-#!/bin/env sh
+#!/bin/sh
 
 docker run --rm -t -v $(pwd):/app:rw mkenney/composer $@
 
