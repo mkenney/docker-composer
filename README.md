@@ -4,11 +4,11 @@ The source repo contains a `composer` script that wraps executing a docker conta
 
 # SOURCE REPOSITORY
 
-* [mkenney/docker-php-base](https://github.com/mkenney/docker-php-base)
+* [mkenney/docker-composer](https://github.com/mkenney/docker-composer)
 
 # Docker image
 
-* [mkenney/php-base](https://hub.docker.com/r/mkenney/php-base/)
+* [mkenney/composer](https://hub.docker.com/r/mkenney/composer/)
 
 Based on [mkenney/php-base](https://hub.docker.com/r/mkenney/php-base/) (debian:jessie) which is simply a php CLI binary built with various tools, most notably Oracle OCI libraries, because they're a pain to install.
 
