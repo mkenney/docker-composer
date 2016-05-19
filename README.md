@@ -1,9 +1,18 @@
-PHP 7 Composer Dependency Manager
+# Environment independent composer script
 
-Simple usage:
+The source repo contains a `composer` script that wraps executing a docker container to execute [composer](https://getcomposer.org/). The current directory is mounted into /src in the container and a wrapper script executes composer as a user who's `uid` and `gid` matches those properties on that directory. This way composer files are installed as the directory owner/group instead of root or a random user.
 
-`docker pull mkenney/composer`
+# SOURCE REPOSITORY
 
-`docker run --rm -v $(pwd):/src:rw mkenney/composer update`
+* [mkenney/docker-php-base](https://github.com/mkenney/docker-php-base)
 
-There's also a PHP 5 version at `mkenney/composer:php5`
+# Docker image
+
+* [mkenney/php-base](https://hub.docker.com/r/mkenney/php-base/)
+
+Based on [mkenney/php-base](https://hub.docker.com/r/mkenney/php-base/) (debian:jessie) which is simply a php CLI binary built with various tools, most notably Oracle OCI libraries, because they're a pain to install.
+
+# Tagged Dockerfiles
+
+* [latest](https://github.com/mkenney/docker-composer/blob/master/Dockerfile), [php7](https://github.com/mkenney/docker-composer/blob/master/Dockerfile)
+* [php5](https://github.com/mkenney/docker-composer/blob/php5/Dockerfile)
