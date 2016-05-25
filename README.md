@@ -1,3 +1,5 @@
+![PHP v7](https://img.shields.io/badge/PHP-v7.0.6-8892bf.svg) ![Composer v1](https://img.shields.io/badge/composer-v1.1.1-orange.svg) ![License MIT](https://img.shields.io/badge/license-MIT-blue.svg)
+
 # Environment independent composer script
 
 The source repo contains a `composer` script that wraps executing a docker container to execute [composer](https://getcomposer.org/). The current directory is mounted into /src in the container and a wrapper script executes composer as a user who's `uid` and `gid` matches those properties on that directory. This way composer files are installed as the directory owner/group instead of root or a random user.
