@@ -8,7 +8,7 @@ Because this runs out of a Docker container, all files and directories required 
 
 In order to facilitate access to private repositories or use public-key authentication, `$HOME/.ssh` is mounted into the container user's home directory. Any authentication issues that come up can most likely be resolved by modifying your `~/.ssh/config` file.
 
-# SOURCE REPOSITORY
+# Source repository
 
 * [mkenney/docker-composer](https://github.com/mkenney/docker-composer)
 
