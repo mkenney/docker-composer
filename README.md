@@ -4,6 +4,8 @@ The source repo contains a `composer` script that wraps executing a docker conta
 
 Because this runs out of a Docker container, all files and directories required by your composer command must be available within the current directory. Specifying files or directories from other locations on the system will not work. For example, `--working-dir=/home/user/folder/` would attempt to use the `/home/user/folder/` path inside the container instead of on the host.
 
+In order to facilitate access to private repositories or use public-key authentication, `$HOME/.ssh` is mounted into the container user's home directory. Any authentication issues that come up can most likely be resolved by modifying your `~/.ssh/config` file.
+
 # SOURCE REPOSITORY
 
 * [mkenney/docker-composer](https://github.com/mkenney/docker-composer)
