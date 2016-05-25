@@ -1,4 +1,4 @@
-![PHP v7](https://img.shields.io/badge/PHP-v7.0.6-8892bf.svg) ![Composer v1](https://img.shields.io/badge/composer-v1.1.1-orange.svg) ![MIT License](https://img.shields.io/github/license/mkenney/docker-phpdoc.svg) ![Docker pulls](https://img.shields.io/docker/pulls/mkenney/phpdoc.svg) ![Docker stars](https://img.shields.io/docker/stars/mkenney/phpdoc.svg) ![Github issues](https://img.shields.io/github/issues-raw/mkenney/docker-phpdoc.svg)
+![PHP v7](https://img.shields.io/badge/PHP-v7.0.6-8892bf.svg) ![Composer v1](https://img.shields.io/badge/composer-v1.1.1-orange.svg) ![MIT License](https://img.shields.io/github/license/mkenney/docker-composer.svg) ![Docker pulls](https://img.shields.io/docker/pulls/mkenney/composer.svg) ![Docker stars](https://img.shields.io/docker/stars/mkenney/composer.svg) ![Github issues](https://img.shields.io/github/issues-raw/mkenney/docker-composer.svg)
 
 # Environment independent composer script
 
