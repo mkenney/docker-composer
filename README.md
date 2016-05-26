@@ -2,7 +2,7 @@
 
 # Portable composer script
 
-The [source repo](https://github.com/mkenney/docker-composer) contains a `composer` [script](https://github.com/mkenney/docker-composer/blob/master/bin/composer) that wraps executing a docker container to execute [composer](https://getcomposer.org/). The current directory is mounted into `/src` in the container and a wrapper script executes composer as a user who's `uid` and `gid` matches those properties on that directory. This way composer files are installed as the directory owner/group instead of root or a random user.
+The [source repo](https://github.com/mkenney/docker-composer) contains a `composer` [script](https://github.com/mkenney/docker-composer/blob/php5/bin/composer) that wraps executing a docker container to execute [composer](https://getcomposer.org/). The current directory is mounted into `/src` in the container and a wrapper script executes composer as a user who's `uid` and `gid` matches those properties on that directory. This way composer files are installed as the directory owner/group instead of root or a random user.
 
 Because this runs out of a Docker container, all files and directories required by your composer command must be available within the current directory. Specifying files or directories from other locations on the system will not work. For example, `--working-dir=/home/user/folder/` would attempt to use the `/home/user/folder/` path inside the container instead of on the host.
 
