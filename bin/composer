@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 if [ "self-update" == "$1" ]; then
     docker pull mkenney/composer
