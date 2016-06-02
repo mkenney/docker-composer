@@ -22,7 +22,7 @@ In order to facilitate access to private repositories or use public-key authenti
 
 ## 2016-06-02
 
-I changed the base image from [mkenney/php-base](https://hub.docker.com/r/mkenney/php-base/) to [alpine](https://hub.docker.com/_/alpine/) to reduce the image size and because Composer doesn't have many dependencies. This reduced the image size from ~330MB to ~35MB. Please [let me know](https://github.com/mkenney/docker-composer/issues) if you have any problems.
+I changed the base image from [mkenney/php-base](https://hub.docker.com/r/mkenney/php-base/) to [alpine](https://hub.docker.com/_/alpine/) to reduce the image size and because Composer doesn't have many dependencies. This reduced the image size from ~330MB to 34MB. Please [let me know](https://github.com/mkenney/docker-composer/issues) if you have any problems.
 
 # Tagged Dockerfiles
 
