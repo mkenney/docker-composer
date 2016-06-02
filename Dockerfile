@@ -1,4 +1,4 @@
-FROM mkenney/php-base:php5
+FROM alpine:3.3
 
 MAINTAINER Michael Kenney <mkenney@webbedlam.com>
 
@@ -6,21 +6,49 @@ MAINTAINER Michael Kenney <mkenney@webbedlam.com>
 # composer
 ##############################################################################
 
-ENV COMPOSER_HOME /root/composer
+COPY container/as-user /as-user
+COPY container/composer-wrapper /composer-wrapper
+
+ENV COMPOSER_HOME /dev/composer
 ENV COMPOSER_VERSION master
-ENV XDEBUG_CONF /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
+VOLUME /src
+WORKDIR /src
 
 RUN set -x \
-    && mkdir /root/composer \
+
+    # Install required packages
+    && apk add --no-cache --repository "http://dl-cdn.alpinelinux.org/alpine/edge/testing" \
+        ca-certificates \
+        git \
+        mercurial \
+        openssh \
+        shadow \
+        subversion \
+        sudo \
+        php \
+        php-curl \
+        php-iconv \
+        php-json \
+        php-openssl \
+        php-phar \
+        php-posix \
+        wget \
+
+    # Create a dev user to use as the directory owner
+    && groupadd dev \
+    && useradd dev -s /bin/bash -m -g dev -G root \
+    && echo "dev:password" | chpasswd \
+    && chmod 0777 /home/dev \
+
+    # Install composer
+    && mkdir /dev/composer \
+    && chmod -R 0777 /dev/composer \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-    && composer config -g secure-http false \
-    && cd /root/composer \
-    && chmod -R 0777 . \
+    && sudo -u dev /usr/local/bin/composer config -g secure-http false \
 
-    # Disable xdebug
-    && echo ""                         >  ${XDEBUG_CONF} \
-    && echo "xdebug.default_enable=0"  >> ${XDEBUG_CONF} \
-    && echo "xdebug.remote_enable=0"   >> ${XDEBUG_CONF} \
-    && echo "xdebug.profiler_enable=0" >> ${XDEBUG_CONF}
+    # Make sure it all runs
+    && chmod 0755 /as-user \
+    && chmod 0755 /composer-wrapper
 
-ENTRYPOINT ["/as-user","/usr/local/bin/composer"]
+ENTRYPOINT ["/as-user","/composer-wrapper"]

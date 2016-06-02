@@ -18,7 +18,11 @@ In order to facilitate access to private repositories or use public-key authenti
 
 * [mkenney/composer](https://hub.docker.com/r/mkenney/composer/)
 
-Based on [mkenney/php-base](https://hub.docker.com/r/mkenney/php-base/) (debian:jessie) which is simply a php CLI binary built with various tools, most notably Oracle OCI libraries, because they're a pain to install.
+# Change log
+
+## 2016-06-02
+
+I changed the base image from [mkenney/php-base](https://hub.docker.com/r/mkenney/php-base/) to [alpine](https://hub.docker.com/_/alpine/) to reduce the image size and because Composer doesn't have many dependencies. This reduced the image size from ~330MB to ~35MB. Please [let me know](https://github.com/mkenney/docker-composer/issues) if you have any problems.
 
 # Tagged Dockerfiles
 
