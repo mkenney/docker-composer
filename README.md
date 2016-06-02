@@ -18,6 +18,8 @@ In order to facilitate access to private repositories or use public-key authenti
 
 * [mkenney/composer](https://hub.docker.com/r/mkenney/composer/)
 
+Based on [alpine 3.3](https://hub.docker.com/_/alpine/). This is simply a php CLI binary built with a few tools required to run `composer` and to do minimal user management in order to run as a user with the same `uid` and `gid` as the current directory.
+
 # Change log
 
 ## 2016-06-02
