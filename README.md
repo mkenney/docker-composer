@@ -4,11 +4,11 @@
 
 # Portable composer script
 
-The [source repository](https://github.com/mkenney/docker-composer) contains a [shell script](https://github.com/mkenney/docker-composer/blob/php5/bin/composer) that wraps running a docker container to execute [composer](https://getcomposer.org/). The current directory is mounted into `/src` inside the container and an internal wrapper script executes composer as a user who's `uid` and `gid` matches those properties on that mounted directory. This way composer files are installed as the directory owner/group instead of root or a random user.
+The [source repository](https://github.com/mkenney/docker-composer/tree/php5) contains a [shell script](https://github.com/mkenney/docker-composer/blob/php5/bin/composer) that wraps running a docker container to execute [composer](https://getcomposer.org/). The current directory is mounted into `/src` which is the location the `composer` command will run from. In order to facilitate access to private repositories or use public-key authentication, `$HOME/.ssh` is mounted into the container user's home directory. Any authentication issues that come up can most likely be resolved by modifying your `$HOME/.ssh/config` file.
+
+A wrapper script (`/as-user`) is provided in the image that attempts to execute composer as the current user. If the `$HOME/.ssh` directory exists on the host, is mounted into the container properly and is not owned by root, then the wrapper script will execute `composer` as a user who's `uid` and `gid` matches those properties on that mounted directory. Otherwise, the wrapper script will execute `composer` as a user who's `uid` and `gid` matches those properties on the mounted `/src` directory (the current directory). This way composer files are installed as either the current user or as the project directories owner/group instead of root or a random user.
 
 Because this runs out of a Docker container, all files and directories required by your composer command must be available within the current directory. Specifying files or directories from other locations on the system will not work. For example, `--working-dir=/home/user/folder/` would attempt to use the `/home/user/folder/` path inside the container instead of on the host.
-
-In order to facilitate access to private repositories or use public-key authentication, `$HOME/.ssh` is mounted into the container user's home directory. Any authentication issues that come up can most likely be resolved by modifying your `$HOME/.ssh/config` file.
 
 # Source repository
 
@@ -21,6 +21,12 @@ In order to facilitate access to private repositories or use public-key authenti
 Based on [alpine 3.3](https://hub.docker.com/_/alpine/). This is simply a php CLI binary built with a few tools required to run `composer` and to do minimal user management in order to run as a user with the same `uid` and `gid` as the current directory.
 
 # Change log
+
+## 2016-06-03
+
+I modified the `/as-user` command wrapper to check for a valid mounted `~/.ssh` directory. If one exists and it wasn't created by the volume flag in the wrapper script (it's not owned by root) then composer will run as that user, otherwise it will run as the project directory owner.
+
+This fixes a public-key authentication issue when the project directory is not owned by the user running the wrapper script. It will not, however, address issues with the project directory being writable by the current user, that can be solved by fixing the directory permissions on the host and running the script again.
 
 ## 2016-06-02
 

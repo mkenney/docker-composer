@@ -1,4 +1,4 @@
-FROM alpine:3.3
+FROM alpine:latest
 
 MAINTAINER Michael Kenney <mkenney@webbedlam.com>
 
@@ -6,20 +6,15 @@ MAINTAINER Michael Kenney <mkenney@webbedlam.com>
 # composer
 ##############################################################################
 
-COPY container/as-user /as-user
-COPY container/composer-wrapper /composer-wrapper
-
 ENV COMPOSER_HOME /home/dev/.composer
 ENV COMPOSER_VERSION master
-
-VOLUME /src
-WORKDIR /src
 
 RUN set -x \
 
     # Install required packages
     && apk add --no-cache --repository "http://dl-cdn.alpinelinux.org/alpine/edge/testing" \
         ca-certificates \
+        curl \
         git \
         mercurial \
         openssh \
@@ -46,10 +41,15 @@ RUN set -x \
     && chmod -R 0755 /home/dev \
     && chown -R dev:dev /home/dev \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-    && sudo -u dev /usr/local/bin/composer config -g secure-http false \
+    && sudo -u dev /usr/local/bin/composer config -g secure-http false
 
-    # Make sure it all runs
-    && chmod 0755 /as-user \
+# Setup wrapper scripts
+COPY container/as-user /as-user
+COPY container/composer-wrapper /composer-wrapper
+RUN chmod 0755 /as-user \
     && chmod 0755 /composer-wrapper
+
+VOLUME /src
+WORKDIR /src
 
 ENTRYPOINT ["/as-user","/composer-wrapper"]
