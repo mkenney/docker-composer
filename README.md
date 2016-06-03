@@ -4,7 +4,20 @@
 
 # Portable composer script
 
-The [source repository](https://github.com/mkenney/docker-composer/tree/php5) contains a [shell script](https://github.com/mkenney/docker-composer/blob/php5/bin/composer) that wraps running a docker container to execute [composer](https://getcomposer.org/). The current directory is mounted into `/src` which is the location the `composer` command will run from. In order to facilitate access to private repositories or use public-key authentication, `$HOME/.ssh` is mounted into the container user's home directory. Any authentication issues that come up can most likely be resolved by modifying your `$HOME/.ssh/config` file.
+## Synopsys
+
+Essentially, this is just a shell script that manages a very small (34MB) `composer` docker image. The combination of the shell script and docker image allows `composer` to run as either the current user (you) or the owner/group of the current directory.
+
+### Installation
+
+Installation is just a matter of putting the `composer` [shell script](https://github.com/mkenney/docker-composer/blob/master/bin/composer) somewhere in your path. The [default](https://hub.docker.com/r/mkenney/composer/tags/) `image`+`script` are built for PHP-7 but there is a PHP-5 version [available](https://github.com/mkenney/docker-composer/blob/php5/bin/composer) as well. For example, assuming you want the script to live in `/usr/local/bin`, run:
+* `sudo wget -nv -O /usr/local/bin/composer https://raw.githubusercontent.com/mkenney/docker-composer/master/bin/composer`
+* `sudo chmod 0777 /usr/local/bin/composer` (write permission would let the script `self-update` as any user).
+* `composer self-update` (`self-update` pulls down the latest docker image and then updates the shell script itself)
+
+## About
+
+The [source repository](https://github.com/mkenney/docker-composer) contains a [shell script](https://github.com/mkenney/docker-composer/blob/master/bin/composer) that wraps running a docker container to execute [composer](https://getcomposer.org/). The current directory is mounted into `/src` which is the location the `composer` command will run from. In order to facilitate access to private repositories or use public-key authentication, `$HOME/.ssh` is mounted into the container user's home directory. Any authentication issues that come up can most likely be resolved by modifying your `$HOME/.ssh/config` file.
 
 A wrapper script (`/as-user`) is provided in the image that attempts to execute composer as the current user. If the `$HOME/.ssh` directory exists on the host, is mounted into the container properly and is not owned by root, then the wrapper script will execute `composer` as a user who's `uid` and `gid` matches those properties on that mounted directory. Otherwise, the wrapper script will execute `composer` as a user who's `uid` and `gid` matches those properties on the mounted `/src` directory (the current directory). This way composer files are installed as either the current user or as the project directory's owner/group instead of root or a random user.
 
