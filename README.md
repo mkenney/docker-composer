@@ -10,29 +10,29 @@ A wrapper script (`/as-user`) is provided in the image that attempts to execute 
 
 Because this runs out of a Docker container, all files and directories required by your composer command must be available within the current directory. Specifying files or directories from other locations on the system will not work. For example, `--working-dir=/home/user/folder/` would attempt to use the `/home/user/folder/` path inside the container instead of on the host.
 
-# Source repository
+## Source repository
 
 * [mkenney/docker-composer](https://github.com/mkenney/docker-composer)
 
-# Docker image
+## Docker image
 
 * [mkenney/composer](https://hub.docker.com/r/mkenney/composer/)
 
 Based on [alpine 3.3](https://hub.docker.com/_/alpine/). This is simply a php CLI binary built with a few tools required to run `composer` and to do minimal user management in order to run as a user with the same `uid` and `gid` as the current directory.
 
-# Change log
+## Change log
 
-## 2016-06-03
+### 2016-06-03
 
 I modified the `/as-user` command wrapper to check for a valid mounted `~/.ssh` directory. If one exists and it wasn't created by the volume flag in the wrapper script (it's not owned by root) then composer will run as that user, otherwise it will run as the project directory owner.
 
 This fixes a public-key authentication issue when the project directory is not owned by the user running the wrapper script. It will not, however, address issues with the project directory being writable by the current user, that can be solved by fixing the directory permissions on the host and running the script again.
 
-## 2016-06-02
+### 2016-06-02
 
 I changed the base image from [mkenney/php-base](https://hub.docker.com/r/mkenney/php-base/) to [alpine](https://hub.docker.com/_/alpine/) to reduce the image size and because Composer doesn't have many dependencies. This reduced the image size from ~330MB to 34MB. Please [let me know](https://github.com/mkenney/docker-composer/issues) if you have any problems.
 
-# Tagged Dockerfiles
+## Tagged Dockerfiles
 
 * [latest](https://github.com/mkenney/docker-composer/blob/master/Dockerfile), [php7](https://github.com/mkenney/docker-composer/blob/master/Dockerfile)
 * [php5](https://github.com/mkenney/docker-composer/blob/php5/Dockerfile)
