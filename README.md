@@ -4,11 +4,11 @@
 
 # Portable composer script
 
-The [source repo](https://github.com/mkenney/docker-composer) contains a `composer` [script](https://github.com/mkenney/docker-composer/blob/master/bin/composer) that wraps executing a docker container to execute [composer](https://getcomposer.org/). The current directory is mounted into `/src` in the container and a wrapper script executes composer as a user who's `uid` and `gid` matches those properties on that directory. This way composer files are installed as the directory owner/group instead of root or a random user.
+The [source repository](https://github.com/mkenney/docker-composer) contains a [shell script](https://github.com/mkenney/docker-composer/blob/master/bin/composer) that wraps running a docker container to execute [composer](https://getcomposer.org/). The current directory is mounted into `/src` inside the container and an internal wrapper script executes composer as a user who's `uid` and `gid` matches those properties on that mounted directory. This way composer files are installed as the directory owner/group instead of root or a random user.
 
 Because this runs out of a Docker container, all files and directories required by your composer command must be available within the current directory. Specifying files or directories from other locations on the system will not work. For example, `--working-dir=/home/user/folder/` would attempt to use the `/home/user/folder/` path inside the container instead of on the host.
 
-In order to facilitate access to private repositories or use public-key authentication, `$HOME/.ssh` is mounted into the container user's home directory. Any authentication issues that come up can most likely be resolved by modifying your `~/.ssh/config` file.
+In order to facilitate access to private repositories or use public-key authentication, `$HOME/.ssh` is mounted into the container user's home directory. Any authentication issues that come up can most likely be resolved by modifying your `$HOME/.ssh/config` file.
 
 # Source repository
 
