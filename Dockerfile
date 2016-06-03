@@ -21,13 +21,13 @@ RUN set -x \
         shadow \
         subversion \
         sudo \
-        php \
-        php-curl \
-        php-iconv \
-        php-json \
-        php-openssl \
-        php-phar \
-        php-posix \
+        php5 \
+        php5-curl \
+        php5-iconv \
+        php5-json \
+        php5-openssl \
+        php5-phar \
+        php5-posix \
         wget \
 
     # Create a dev user to use as the directory owner
