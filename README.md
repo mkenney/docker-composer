@@ -5,8 +5,11 @@
 ## Tagged Dockerfiles
 
 * [latest](https://github.com/mkenney/docker-composer/blob/master/Dockerfile), [php7](https://github.com/mkenney/docker-composer/blob/master/Dockerfile)
+
   [![PHP v7](https://img.shields.io/badge/PHP-v7.0.6-8892bf.svg) ![Composer v1](https://img.shields.io/badge/composer-v1.1.1-orange.svg)](https://github.com/mkenney/docker-composer)
+
 * [php5](https://github.com/mkenney/docker-composer/blob/php5/Dockerfile)
+
   [![PHP v5](https://img.shields.io/badge/PHP-v5.6.21-8892bf.svg) ![Composer v1](https://img.shields.io/badge/composer-v1.1.1-orange.svg)](https://github.com/mkenney/docker-composer/tree/php5)
 
 ## Synopsys
