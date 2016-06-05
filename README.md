@@ -1,8 +1,13 @@
 ![MIT License](https://img.shields.io/github/license/mkenney/docker-composer.svg) ![Docker pulls](https://img.shields.io/docker/pulls/mkenney/composer.svg) ![Docker stars](https://img.shields.io/docker/stars/mkenney/composer.svg) ![Image size](https://img.shields.io/badge/image size-34MB-blue.svg) ![Github issues](https://img.shields.io/github/issues-raw/mkenney/docker-composer.svg)
 
-![PHP v5](https://img.shields.io/badge/PHP-v5.6.21-8892bf.svg) ![Composer v1](https://img.shields.io/badge/composer-v1.1.1-orange.svg)
-
 # Portable composer script
+
+## Tagged Dockerfiles
+
+* [latest](https://github.com/mkenney/docker-composer/blob/master/Dockerfile), [php7](https://github.com/mkenney/docker-composer/blob/master/Dockerfile)
+  [![PHP v7](https://img.shields.io/badge/PHP-v7.0.6-8892bf.svg) ![Composer v1](https://img.shields.io/badge/composer-v1.1.1-orange.svg)](https://github.com/mkenney/docker-composer)
+* [php5](https://github.com/mkenney/docker-composer/blob/php5/Dockerfile)
+  [![PHP v5](https://img.shields.io/badge/PHP-v5.6.21-8892bf.svg) ![Composer v1](https://img.shields.io/badge/composer-v1.1.1-orange.svg)](https://github.com/mkenney/docker-composer/tree/php5)
 
 ## Synopsys
 
@@ -10,7 +15,7 @@ Essentially, this is just a shell script that manages a very small (34MB) `compo
 
 ### Installation
 
-Installation is just a matter of putting the `composer` [shell script](https://github.com/mkenney/docker-composer/blob/master/bin/composer) somewhere in your path. The [default](https://hub.docker.com/r/mkenney/composer/tags/) `image`+`script` are built for PHP-7 but there is a PHP-5 version [available](https://github.com/mkenney/docker-composer/blob/php5/bin/composer) as well. For example, assuming you want the script to live in `/usr/local/bin`, run:
+Installation is just a matter of putting the `composer` [shell script](https://github.com/mkenney/docker-composer/blob/master/bin/composer) somewhere in your path. The [default](https://hub.docker.com/r/mkenney/composer/tags/) `image`+`script` are built for PHP-7 but there is a [PHP-5 version available](https://github.com/mkenney/docker-composer/blob/php5/bin/composer) as well. For example, assuming you want the script to live in `/usr/local/bin`, run:
 * `sudo wget -nv -O /usr/local/bin/composer https://raw.githubusercontent.com/mkenney/docker-composer/master/bin/composer`
 * `sudo chmod 0777 /usr/local/bin/composer` (write permission would let the script `self-update` as any user).
 * `composer self-update` (`self-update` pulls down the latest docker image and then updates the shell script itself)
@@ -45,7 +50,3 @@ This fixes a public-key authentication issue when the project directory is not o
 
 I changed the base image from [mkenney/php-base](https://hub.docker.com/r/mkenney/php-base/) to [alpine](https://hub.docker.com/_/alpine/) to reduce the image size and because Composer doesn't have many dependencies. This reduced the image size from ~330MB to 34MB. Please [let me know](https://github.com/mkenney/docker-composer/issues) if you have any problems.
 
-## Tagged Dockerfiles
-
-* [latest](https://github.com/mkenney/docker-composer/blob/master/Dockerfile), [php7](https://github.com/mkenney/docker-composer/blob/master/Dockerfile)
-* [php5](https://github.com/mkenney/docker-composer/blob/php5/Dockerfile)
