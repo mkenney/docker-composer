@@ -43,6 +43,10 @@ Based on [alpine 3.3](https://hub.docker.com/_/alpine/). This is simply a php CL
 
 ## Change log
 
+### 2016-06-06
+
+I removed the `as-user` and `composer-wrapper` scripts and put them in a [separate repo](https://github.com/mkenney/docker-scripts/tree/master/container) to reduce duplicate code. [Let me know](https://github.com/mkenney/docker-composer/issues) if you have any trouble.
+
 ### 2016-06-03
 
 I modified the `/as-user` command wrapper to check for a valid mounted `~/.ssh` directory. If one exists and it wasn't created by the volume flag in the wrapper script (it's not owned by root) then composer will run as that user, otherwise it will run as the project directory owner.
