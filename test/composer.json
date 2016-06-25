@@ -1,0 +1,8 @@
+{
+    "name": "mkenney/composer",
+    "description": "Basic test for this image",
+    "require": {
+        "php": ">=7.0.0",
+        "composer/composer": "1.1.2"
+    }
+}
