@@ -1,8 +1,11 @@
 #!/usr/bin/env sh
 
-if [ "self-update" == "$1" ]; then
-    docker pull mkenney/composer
-    wget -nv -O $0 https://raw.githubusercontent.com/mkenney/docker-composer/master/bin/composer
+TAG=php7
+BRANCH=master
+
+if [ "self-update" = "$1" ]; then
+    docker pull mkenney/composer:$TAG
+    wget -nv -O $0 https://raw.githubusercontent.com/mkenney/docker-composer/$BRANCH/bin/composer
 else
-    docker run --rm -t -i -v $(pwd):/src:rw -v $HOME/.ssh:/home/dev/.ssh:ro mkenney/composer $@
+    docker run --rm -t -i -v $(pwd):/src:rw -v $HOME/.ssh:/home/dev/.ssh:ro mkenney/composer:$TAG $@
 fi
