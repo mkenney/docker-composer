@@ -18,16 +18,25 @@ Essentially, this is just a shell script that manages a very small (34MB) `compo
 
 ### Installation
 
-Installation is just a matter of putting the `composer` [shell script](https://github.com/mkenney/docker-composer/blob/master/bin/composer) somewhere in your path. The [default](https://hub.docker.com/r/mkenney/composer/tags/) `image`+`script` are built for PHP-7 but there is a [PHP-5 version available](https://github.com/mkenney/docker-composer/blob/php5/bin/composer) as well. For example, assuming you want the script to live in `/usr/local/bin`, run:
-* `sudo wget -nv -O /usr/local/bin/composer https://raw.githubusercontent.com/mkenney/docker-composer/php5/bin/composer`
-* `sudo chmod 0777 /usr/local/bin/composer` (write permission would let the script `self-update` as any user).
-* `composer self-update` (`self-update` pulls down the latest docker image and then updates the shell script itself)
+This assumes that you already have [Docker](https://www.docker.com) installed. A running `docker` daemon is required.
+
+Installation is just a matter of putting the [shell script](https://github.com/mkenney/docker-composer/blob/master/bin/composer) somewhere in your path and making it executable. I like to put my scripts in a `bin/` folder in my home directory:
+* PHP 5
+
+  `wget -nv -O ~/bin/composer https://raw.githubusercontent.com/mkenney/docker-composer/php5/bin/composer && chmod 0755 ~/bin/composer`
+
+* PHP 7
+
+  `wget -nv -O ~/bin/composer https://raw.githubusercontent.com/mkenney/docker-composer/master/bin/composer && chmod 0755 ~/bin/composer`
+* `composer self-update`
+
+  The `self-update` command pulls down the latest docker image and then updates the shell script itself. If you don't have write permissions on the shell script you'll get a permissions error, you can run the self-update command with `sudo` if needed.
 
 ## About
 
 The [source repository](https://github.com/mkenney/docker-composer) contains a [shell script](https://github.com/mkenney/docker-composer/blob/php5/bin/composer) that wraps running a docker container to execute [composer](https://getcomposer.org/). The current directory is mounted into `/src` which is the location the `composer` command will run from. In order to facilitate access to private repositories or use public-key authentication, `$HOME/.ssh` is mounted into the container user's home directory. Any authentication issues that come up can most likely be resolved by modifying your `$HOME/.ssh/config` file.
 
-A wrapper script (`/as-user`) is provided in the image that attempts to execute composer as the current user. If the `$HOME/.ssh` directory exists on the host, is mounted into the container properly and is not owned by root, then the wrapper script will execute `composer` as a user who's `uid` and `gid` matches those properties on that mounted directory. Otherwise, the wrapper script will execute `composer` as a user who's `uid` and `gid` matches those properties on the mounted `/src` directory (the current directory). This way composer files are installed as either the current user or as the project directory's owner/group instead of root or a random user.
+A wrapper script (`/run-as-user`) is provided in the image that attempts to execute composer as the current user. If the `$HOME/.ssh` directory exists on the host, is mounted into the container properly and is not owned by root, then the wrapper script will execute `composer` as a user who's `uid` and `gid` matches those properties on that mounted directory. Otherwise, the wrapper script will execute `composer` as a user who's `uid` and `gid` matches those properties on the mounted `/src` directory (the current directory). This way composer files are installed as either the current user or as the project directory's owner/group instead of root or a random user.
 
 Because this runs out of a Docker container, all files and directories required by your composer command must be available within the current directory. Specifying files or directories from other locations on the system will not work. For example, `--working-dir=/home/user/folder/` would attempt to use the `/home/user/folder/` path inside the container instead of on the host.
 
@@ -49,7 +58,7 @@ I have re-structured automated the Docker Hub builds, they are no longer trigger
 
 There may be an issue with API call throttling on the Docker Hub side, if that seems to be happening I'll dig in further.
 
-Please [let me know](https://github.com/mkenney/docker-phpunit/issues) if you have any problems.
+Please [let me know](https://github.com/mkenney/docker-composer/issues) if you have any problems.
 
 ### 2016-06-06
 

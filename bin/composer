@@ -1,8 +1,11 @@
 #!/usr/bin/env sh
 
-if [ "self-update" == "$1" ]; then
-    docker pull mkenney/composer:php5
-    wget -nv -O $0 https://raw.githubusercontent.com/mkenney/docker-composer/php5/bin/composer
+TAG=php5
+BRANCH=php5
+
+if [ "self-update" = "$1" ]; then
+    docker pull mkenney/composer:$TAG
+    wget -nv -O $0 https://raw.githubusercontent.com/mkenney/docker-composer/$BRANCH/bin/composer
 else
-    docker run --rm -t -i -v $(pwd):/src:rw -v $HOME/.ssh:/home/dev/.ssh:ro mkenney/composer:php5 $@
+    docker run --rm -t -i -v $(pwd):/src:rw -v $HOME/.ssh:/home/dev/.ssh:ro mkenney/composer:$TAG $@
 fi
