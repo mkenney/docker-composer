@@ -9,7 +9,6 @@ branches:
     only:
         - master
         - php5
-        - continuous-deployment
 
 notifications:
     slack:
