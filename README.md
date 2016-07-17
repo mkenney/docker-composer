@@ -43,6 +43,14 @@ Based on [alpine 3.3](https://hub.docker.com/_/alpine/). This is simply a php CL
 
 ## Change log
 
+### 2016-07-16
+
+I have re-structured automated the Docker Hub builds, they are no longer triggered by GitHub pushes. Instead they are triggered by a deployment script that is executed on successful `travis-ci` builds. This way, even if builds are failing the image on DockerHub should remain the last stable image at all times.
+
+There may be an issue with API call throttling on the Docker Hub side, if that seems to be happening I'll dig in further.
+
+Please [let me know](https://github.com/mkenney/docker-phpunit/issues) if you have any problems.
+
 ### 2016-06-06
 
 I removed the `as-user` and `composer-wrapper` scripts and put them in a [separate repo](https://github.com/mkenney/docker-scripts/tree/master/container) to reduce duplicate code. [Let me know](https://github.com/mkenney/docker-composer/issues) if you have any trouble.
