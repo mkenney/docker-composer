@@ -10,6 +10,7 @@ ENV COMPOSER_HOME /home/dev/.composer
 ENV COMPOSER_VERSION master
 
 RUN set -x \
+    && apk update \
 
     # Install required packages
     && apk add --no-cache --repository "http://dl-cdn.alpinelinux.org/alpine/edge/testing" \
@@ -18,7 +19,6 @@ RUN set -x \
         git \
         mercurial \
         openssh \
-        shadow \
         subversion \
         sudo \
         php7 \
@@ -34,8 +34,8 @@ RUN set -x \
     && ln -s /usr/bin/php7 /usr/bin/php \
 
     # Create a dev user to use as the directory owner
-    && groupadd dev \
-    && useradd dev -s /bin/sh -m -g dev -G root \
+    && addgroup dev \
+    && adduser -D -s /bin/sh -G dev -G root dev \
     && echo "dev:password" | chpasswd \
 
     # Install composer
