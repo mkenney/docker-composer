@@ -10,10 +10,11 @@ ENV COMPOSER_HOME /home/dev/.composer
 ENV COMPOSER_VERSION master
 
 RUN set -x \
+    && echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
     && apk update \
 
     # Install required packages
-    && apk add --no-cache --repository "http://dl-cdn.alpinelinux.org/alpine/edge/testing" \
+    && apk add --no-cache \
         ca-certificates \
         curl \
         git \
@@ -28,6 +29,7 @@ RUN set -x \
         php5-openssl \
         php5-phar \
         php5-posix \
+        shadow \
         wget \
 
     # Create a dev user to use as the directory owner
