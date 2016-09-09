@@ -10,15 +10,18 @@ ENV COMPOSER_HOME /home/dev/.composer
 ENV COMPOSER_VERSION master
 
 RUN set -x \
-    && apk update \
 
     # Install required packages
-    && apk add --no-cache --repository "http://dl-cdn.alpinelinux.org/alpine/edge/testing" \
+    && echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
+    && echo "http://dl-4.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
+    && apk update \
+    && apk add \
         ca-certificates \
         curl \
         git \
         mercurial \
         openssh \
+        shadow \
         subversion \
         sudo \
         php7 \
