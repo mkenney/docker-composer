@@ -54,6 +54,10 @@ Based on [alpine 3.3](https://hub.docker.com/_/alpine/). This is simply a php CL
 
 ### 2016-09-08
 
+I removed the `root` group from the dev user, it was interfering with the `run-as-user` script
+
+### 2016-09-08
+
 I fixed an upstream error with the script wrapper (the `shadow` package was moved to another repository).
 
 ### 2016-07-16
