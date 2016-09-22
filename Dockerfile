@@ -38,7 +38,7 @@ RUN set -x \
 
     # Create a dev user to use as the directory owner
     && addgroup dev \
-    && adduser -D -s /bin/sh -G dev -G root dev \
+    && adduser -D -s /bin/sh -G dev dev \
     && echo "dev:password" | chpasswd \
 
     # Install composer
