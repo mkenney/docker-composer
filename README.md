@@ -6,11 +6,11 @@
 
 * [latest](https://github.com/mkenney/docker-composer/blob/master/Dockerfile), [php7](https://github.com/mkenney/docker-composer/blob/master/Dockerfile)
 
-  ![build status](https://travis-ci.org/mkenney/docker-composer.svg?branch=master) [![PHP v7](https://img.shields.io/badge/PHP-v7.0.6-8892bf.svg) ![Composer v1](https://img.shields.io/badge/composer-v1.1.2-orange.svg)](https://github.com/mkenney/docker-composer)
+  ![build status](https://travis-ci.org/mkenney/docker-composer.svg?branch=master) [![PHP v7](https://img.shields.io/badge/PHP-v7.0.11-8892bf.svg) ![Composer v1](https://img.shields.io/badge/composer-v1.1.2-orange.svg)](https://github.com/mkenney/docker-composer)
 
 * [php5](https://github.com/mkenney/docker-composer/blob/php5/Dockerfile)
 
-  ![build status](https://travis-ci.org/mkenney/docker-composer.svg?branch=php5) [![PHP v5](https://img.shields.io/badge/PHP-v5.6.21-8892bf.svg) ![Composer v1](https://img.shields.io/badge/composer-v1.1.2-orange.svg)](https://github.com/mkenney/docker-composer/tree/php5)
+  ![build status](https://travis-ci.org/mkenney/docker-composer.svg?branch=php5) [![PHP v5](https://img.shields.io/badge/PHP-v5.6.26-8892bf.svg) ![Composer v1](https://img.shields.io/badge/composer-v1.1.2-orange.svg)](https://github.com/mkenney/docker-composer/tree/php5)
 
 ## Synopsys
 
@@ -51,6 +51,12 @@ Because this runs out of a Docker container, all files and directories required 
 Based on [alpine 3.3](https://hub.docker.com/_/alpine/). This is simply a php CLI binary built with a few tools required to run `composer` and to do minimal user management in order to run as a user with the same `uid` and `gid` as the current directory.
 
 ## Change log
+
+### 2016-10-07
+
+* updated the software version badges in this document with current information
+* updated the `bin/composer` wrapper script
+* added a `travis-ci` test to validate [this issue](2)
 
 ### 2016-09-08
 
