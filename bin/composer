@@ -2,10 +2,15 @@
 
 TAG=php7
 BRANCH=master
+SCRIPT=composer
 
-if [ "self-update" = "$1" ]; then
-    docker pull mkenney/composer:$TAG
-    wget -nv -O $0 https://raw.githubusercontent.com/mkenney/docker-composer/$BRANCH/bin/composer
+if [ "self-update" == "$1" ]; then
+    docker pull mkenney/$SCRIPT:$TAG
+    wget -nv --no-check-certificate -O /tmp/$SCRIPT https://raw.githubusercontent.com/mkenney/docker-$SCRIPT/$BRANCH/bin/$SCRIPT \
+        && cat /tmp/$SCRIPT > $0 \
+        && rm -f /tmp/$SCRIPT \
+        && exit 0
+    exit 1
 else
-    docker run --rm -t -i -v $(pwd):/src:rw -v $HOME/.ssh:/home/dev/.ssh:ro mkenney/composer:$TAG $@
+    docker run --rm -t -i -v $(pwd):/src:rw -v $HOME/.ssh:/home/dev/.ssh:ro mkenney/$SCRIPT:$TAG $@
 fi
