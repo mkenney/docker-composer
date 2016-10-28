@@ -54,6 +54,11 @@ Based on [alpine 3.3](https://hub.docker.com/_/alpine/). This is simply a php CL
 
 ### 2016-10-07
 
+* Switched to the official PHP alpine images
+* Updated shell script for wider compatibility
+
+### 2016-10-07
+
 * updated the software version badges in this document with current information
 * updated the `bin/composer` wrapper script
 * added a `travis-ci` test to validate [this issue](https://github.com/mkenney/docker-composer/issues/2)
