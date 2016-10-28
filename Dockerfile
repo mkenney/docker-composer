@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM php:5-alpine
 
 MAINTAINER Michael Kenney <mkenney@webbedlam.com>
 
@@ -12,7 +12,8 @@ ENV COMPOSER_VERSION master
 RUN set -x \
 
     # Install required packages
-    && echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
+    #&& echo "http://dl-4.alpinelinux.org/alpine/v3.4/main" >> /etc/apk/repositories \
+    #&& echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
     && echo "http://dl-4.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
     && apk update \
     && apk add \
@@ -24,15 +25,14 @@ RUN set -x \
         shadow \
         subversion \
         sudo \
-        php5 \
-        php5-curl \
-        php5-iconv \
-        php5-json \
-        php5-openssl \
-        php5-phar \
-        php5-posix \
-        shadow \
         wget \
+    && docker-php-ext-install \
+        curl \
+        iconv \
+        json \
+        openssl \
+        phar \
+        posix \
 
     # Create a dev user to use as the directory owner
     && addgroup dev \

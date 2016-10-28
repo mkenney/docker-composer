@@ -4,7 +4,7 @@ TAG=php5
 BRANCH=php5
 SCRIPT=composer
 
-if [ "self-update" == "$1" ]; then
+if [ "self-update" = "$1" ]; then
     docker pull mkenney/$SCRIPT:$TAG
     wget -nv --no-check-certificate -O /tmp/$SCRIPT https://raw.githubusercontent.com/mkenney/docker-$SCRIPT/$BRANCH/bin/$SCRIPT \
         && cat /tmp/$SCRIPT > $0 \
