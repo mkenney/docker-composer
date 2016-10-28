@@ -52,7 +52,7 @@ Based on [alpine 3.3](https://hub.docker.com/_/alpine/). This is simply a php CL
 
 ## Change log
 
-### 2016-10-07
+### 2016-10-28
 
 * Switched to the official PHP alpine images
 * Updated shell script for wider compatibility
