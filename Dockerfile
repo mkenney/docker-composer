@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM php:7-alpine
 
 MAINTAINER Michael Kenney <mkenney@webbedlam.com>
 
@@ -12,7 +12,8 @@ ENV COMPOSER_VERSION master
 RUN set -x \
 
     # Install required packages
-    && echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
+    #&& echo "http://dl-4.alpinelinux.org/alpine/v3.4/main" >> /etc/apk/repositories \
+    #&& echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
     && echo "http://dl-4.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
     && apk update \
     && apk add \
@@ -24,17 +25,14 @@ RUN set -x \
         shadow \
         subversion \
         sudo \
-        php7 \
-        php7-curl \
-        php7-iconv \
-        php7-json \
-        php7-openssl \
-        php7-phar \
-        php7-posix \
         wget \
-
-    # Link so that the wrapper script works for both versions
-    && ln -s /usr/bin/php7 /usr/bin/php \
+    && docker-php-ext-install \
+        curl \
+        iconv \
+        json \
+        openssl \
+        phar \
+        posix \
 
     # Create a dev user to use as the directory owner
     && addgroup dev \

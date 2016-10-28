@@ -34,7 +34,7 @@ Installation is just a matter of putting the [shell script](https://github.com/m
 
 ## About
 
-The [source repository](https://github.com/mkenney/docker-composer) contains a [shell script](https://github.com/mkenney/docker-composer/blob/master/bin/composer) that wraps running a docker container to execute [composer](https://getcomposer.org/). The current directory is mounted into `/src` which is the location the `composer` command will run from. In order to facilitate access to private repositories or use public-key authentication, `$HOME/.ssh` is mounted into the container user's home directory. Any authentication issues that come up can most likely be resolved by modifying your `$HOME/.ssh/config` file.
+The [source repository](https://github.com/mkenney/docker-composer) contains a [shell script](https://github.com/mkenney/docker-composer/blob/php5/bin/composer) that wraps running a docker container to execute [composer](https://getcomposer.org/). The current directory is mounted into `/src` which is the location the `composer` command will run from. In order to facilitate access to private repositories or use public-key authentication, `$HOME/.ssh` is mounted into the container user's home directory. Any authentication issues that come up can most likely be resolved by modifying your `$HOME/.ssh/config` file.
 
 A wrapper script (`/run-as-user`) is provided in the image that attempts to execute composer as the current user. If the `$HOME/.ssh` directory exists on the host, is mounted into the container properly and is not owned by root, then the wrapper script will execute `composer` as a user who's `uid` and `gid` matches those properties on that mounted directory. Otherwise, the wrapper script will execute `composer` as a user who's `uid` and `gid` matches those properties on the mounted `/src` directory (the current directory). This way composer files are installed as either the current user or as the project directory's owner/group instead of root or a random user.
 
@@ -51,6 +51,11 @@ Because this runs out of a Docker container, all files and directories required 
 Based on [alpine 3.3](https://hub.docker.com/_/alpine/). This is simply a php CLI binary built with a few tools required to run `composer` and to do minimal user management in order to run as a user with the same `uid` and `gid` as the current directory.
 
 ## Change log
+
+### 2016-10-28
+
+* Switched to the official PHP alpine images
+* Updated shell script for wider compatibility
 
 ### 2016-10-07
 
