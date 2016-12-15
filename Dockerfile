@@ -1,4 +1,4 @@
-FROM php:7-alpine
+FROM php:7.0-alpine
 
 MAINTAINER Michael Kenney <mkenney@webbedlam.com>
 
