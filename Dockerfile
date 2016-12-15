@@ -1,4 +1,4 @@
-FROM php:7.0-alpine
+FROM php:7-alpine
 
 MAINTAINER Michael Kenney <mkenney@webbedlam.com>
 
@@ -19,8 +19,8 @@ RUN set -x \
     && apk add \
         ca-certificates \
         curl \
-        git \
-        libcurl \
+        curl-dev \
+        curl \
         libcrypto1.0 \
         mercurial \
         openssh \
