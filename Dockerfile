@@ -20,6 +20,7 @@ RUN set -x \
         ca-certificates \
         curl \
         git \
+        libcurl \
         libcrypto1.0 \
         mercurial \
         openssh \
