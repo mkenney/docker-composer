@@ -20,7 +20,7 @@ services:
     - docker
 
 before_install:
-    - docker build -t mkenney/composer:ci-build .
+    - docker build -t mkenney/composer:ci-build . --no-cache
     - cd test
 
 script:
