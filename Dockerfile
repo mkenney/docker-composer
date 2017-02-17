@@ -12,30 +12,34 @@ ENV COMPOSER_VERSION master
 RUN set -x \
 
     # Install required packages
-    #&& echo "http://dl-4.alpinelinux.org/alpine/v3.4/main" >> /etc/apk/repositories \
-    #&& echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
+    && echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
     && echo "http://dl-4.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
     && apk update \
     && apk add \
         ca-certificates \
         curl \
-        git \
+        curl-dev \
         libcrypto1.0 \
+        m4 \
         mercurial \
         openssh \
+        openssl-dev \
         shadow \
         subversion \
         sudo \
-        wget \
+        wget
+
+RUN set -x \
     && docker-php-ext-install \
         curl \
         iconv \
         json \
-        openssl \
+        #openssl \
         phar \
-        posix \
+        posix
 
     # Create a dev user to use as the directory owner
+RUN set -x \
     && addgroup dev \
     && adduser -D -s /bin/sh -G dev dev \
     && echo "dev:password" | chpasswd \
