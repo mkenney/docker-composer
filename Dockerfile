@@ -19,7 +19,9 @@ RUN set -x \
         ca-certificates \
         curl \
         curl-dev \
+        git \
         libcrypto1.0 \
+        libmcrypt-dev \
         m4 \
         mercurial \
         openssh \
@@ -34,7 +36,7 @@ RUN set -x \
         curl \
         iconv \
         json \
-        #openssl \
+        mcrypt \
         phar \
         posix
 
