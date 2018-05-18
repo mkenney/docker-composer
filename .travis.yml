@@ -25,7 +25,6 @@ before_install:
 
 script:
     - docker run --rm -it -v $(pwd):/src:rw -v $HOME/.ssh:/home/dev/.ssh:ro mkenney/composer:ci-build update
-    - docker run --rm -it -v $(pwd):/src:rw -v $HOME/.ssh:/home/dev/.ssh:ro mkenney/composer:ci-build require endroid/qrcode
 
 after_success:
     - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then cd ../ci && sh ./deploy.sh; fi
