@@ -21,7 +21,6 @@ RUN set -x \
         curl-dev \
         git \
         libcrypto1.0 \
-        libmcrypt-dev \
         m4 \
         mercurial \
         openssh \
@@ -36,7 +35,6 @@ RUN set -x \
         curl \
         iconv \
         json \
-        mcrypt \
         phar \
         posix
 
@@ -53,6 +51,7 @@ RUN set -x \
     && chown -R dev:dev /home/dev \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && sudo -u dev /usr/local/bin/composer config -g secure-http false \
+    && composer self-update \
 
     # Setup wrapper scripts
     && wget -O /run-as-user https://raw.githubusercontent.com/mkenney/docker-scripts/master/container/run-as-user \
