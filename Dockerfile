@@ -56,10 +56,12 @@ RUN set -x \
     # Setup wrapper scripts
     && wget -O /run-as-user https://raw.githubusercontent.com/mkenney/docker-scripts/master/container/run-as-user \
     && wget -O /composer-wrapper https://raw.githubusercontent.com/mkenney/docker-scripts/master/container/composer-wrapper \
+    && wget -O /set-ssh-key-perms https://raw.githubusercontent.com/mkenney/docker-scripts/master/container/set-ssh-key-perms \
     && chmod 0755 /run-as-user \
-    && chmod 0755 /composer-wrapper
+    && chmod 0755 /composer-wrapper \
+    && chmod 0755 /set-ssh-key-perms
 
 VOLUME /src
 WORKDIR /src
 
-ENTRYPOINT ["/run-as-user", "/composer-wrapper"]
+ENTRYPOINT ["/set-ssh-key-perms", "/run-as-user", "/composer-wrapper"]
