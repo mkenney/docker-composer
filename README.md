@@ -4,7 +4,7 @@
 
 [![MIT License](https://img.shields.io/github/license/mkenney/docker-composer.svg)](https://github.com/mkenney/docker-composer/blob/master/LICENSE) [![stability-mature](https://img.shields.io/badge/stability-mature-008000.svg)](https://github.com/mkenney/software-guides/blob/master/STABILITY-BADGES.md#mature) [![Build status](https://travis-ci.org/mkenney/docker-composer.svg?branch=master)](https://travis-ci.org/mkenney/docker-composer) [![Github issues](https://img.shields.io/github/issues-raw/mkenney/docker-composer.svg)](https://github.com/mkenney/docker-composer/issues) [![Github pull requests](https://img.shields.io/github/issues-pr/mkenney/docker-composer.svg)](https://github.com/mkenney/docker-composer/pulls)
 
-## Portable `composer` dev and build tool.
+Portable `composer` dev and build tool.
 
 ### Tagged Images
 
@@ -25,6 +25,10 @@ Based on [`php:7.0-cli-alpine`](https://hub.docker.com/r/library/php/). This is 
 #### [`php5` Dockerfile](https://github.com/mkenney/docker-composer/blob/master/php5/Dockerfile)
 
 Based on [`php:7.0-cli-alpine`](https://hub.docker.com/r/library/php/).
+
+### Installation
+
+Essentially, this is just a [shell script](https://github.com/mkenney/docker-composer/tree/master/bin/composer) that manages a [Composer](https://getcomposer.org/) docker image. The docker image includes a script ([`run-as-user`](https://github.com/mkenney/docker-scripts/tree/master/container)) that allows commands to write files as either the current user or the owner/group of the current directory, which the shell scripts take advantage of to make sure files are created with your preferred permissions rather than root.
 
 ### About
 
@@ -60,8 +64,3 @@ If you would to see like additional modules, tags, and/or wrapper scripts added 
 * `composer self-update`
 
   The `self-update` command pulls down the latest docker image _matching the current image tag_ and updates the shell script itself. If you don't have write permissions on the shell script you'll get a permissions error, you can run the self-update command with `sudo` if needed.
-
-### Installation
-
-Essentially, this is just a [shell script](https://github.com/mkenney/docker-composer/tree/master/bin/composer) that manages a [Composer](https://getcomposer.org/) docker image. The docker image includes a script ([`run-as-user`](https://github.com/mkenney/docker-scripts/tree/master/container)) that allows commands to write files as either the current user or the owner/group of the current directory, which the shell scripts take advantage of to make sure files are created with your preferred permissions rather than root.
-
