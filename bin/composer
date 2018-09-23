@@ -1,12 +1,14 @@
 #!/usr/bin/env sh
 
-TAG=php7
-BRANCH=master
+TAG=php7.1
+if [ "" != "$DOCKER_COMPOSER_TAG" ]; then
+    TAG="$DOCKER_COMPOSER_TAG"
+fi
 SCRIPT=composer
 
 if [ "self-update" = "$1" ]; then
     docker pull mkenney/$SCRIPT:$TAG
-    wget -nv --no-check-certificate -O /tmp/$SCRIPT https://raw.githubusercontent.com/mkenney/docker-$SCRIPT/$BRANCH/bin/$SCRIPT \
+    wget -nv --no-check-certificate -O /tmp/$SCRIPT https://raw.githubusercontent.com/mkenney/docker-$SCRIPT/master/bin/$SCRIPT \
         && cat /tmp/$SCRIPT > $0 \
         && rm -f /tmp/$SCRIPT \
         && exit 0

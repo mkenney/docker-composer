@@ -10,7 +10,6 @@ language: sh
 branches:
     only:
         - master
-        - php5
 
 notifications:
     slack:
@@ -20,12 +19,25 @@ services:
     - docker
 
 before_install:
-    - docker build -t mkenney/composer:ci-build . --no-cache
+    - docker build -t mkenney/composer:ci-build-latest ./latest --no-cache
+    - docker build -t mkenney/composer:ci-build-php7   ./php7 --no-cache
+    - docker build -t mkenney/composer:ci-build-php7.0 ./php7.0 --no-cache
+    - docker build -t mkenney/composer:ci-build-php5   ./php5 --no-cache
     - cd test
 
 script:
-    - docker run --rm -it -v $(pwd):/src:rw -v $HOME/.ssh:/home/dev/.ssh:ro mkenney/composer:ci-build update
-    - docker run --rm -it -v $(pwd):/src:rw -v $HOME/.ssh:/home/dev/.ssh:ro mkenney/composer:ci-build require endroid/qrcode
+    - rm -rf vendor/
+    - docker run --rm -it -v $(pwd):/src:rw mkenney/composer:ci-build-latest update
+    - docker run --rm -it -v $(pwd):/src:rw mkenney/composer:ci-build-latest require endroid/qrcode
+    - rm -rf vendor/
+    - docker run --rm -it -v $(pwd):/src:rw mkenney/composer:ci-build-php7 update
+    - docker run --rm -it -v $(pwd):/src:rw mkenney/composer:ci-build-php7 require endroid/qrcode
+    - rm -rf vendor/
+    - docker run --rm -it -v $(pwd):/src:rw mkenney/composer:ci-build-php7.0 update
+    - docker run --rm -it -v $(pwd):/src:rw mkenney/composer:ci-build-php7.0 require endroid/qrcode
+    - rm -rf vendor/
+    - docker run --rm -it -v $(pwd):/src:rw mkenney/composer:ci-build-php5 update
+    - docker run --rm -it -v $(pwd):/src:rw mkenney/composer:ci-build-php5 require endroid/qrcode
 
 after_success:
     - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then cd ../ci && sh ./deploy.sh; fi
