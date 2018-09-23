@@ -1,38 +1,36 @@
-![MIT License](https://img.shields.io/github/license/mkenney/docker-composer.svg) ![Docker pulls](https://img.shields.io/docker/pulls/mkenney/composer.svg) ![Docker stars](https://img.shields.io/docker/stars/mkenney/composer.svg) ![Image size](https://img.shields.io/badge/image/size-34MB-blue.svg) ![Github issues](https://img.shields.io/github/issues-raw/mkenney/docker-composer.svg)
+[![docker-badges.webbedlam.com](http://docker-badges.webbedlam.com/image/mkenney/composer)](https://hub.docker.com/r/mkenney/composer/)
 
-# Portable composer script
+# composer
 
-## Tagged Dockerfiles
+[![MIT License](https://img.shields.io/github/license/mkenney/docker-composer.svg)](https://github.com/mkenney/docker-composer/blob/master/LICENSE) [![stability-mature](https://img.shields.io/badge/stability-mature-008000.svg)](https://github.com/mkenney/software-guides/blob/master/STABILITY-BADGES.md#mature) [![Build status](https://travis-ci.org/mkenney/docker-composer.svg?branch=master)](https://travis-ci.org/mkenney/docker-composer) [![Github issues](https://img.shields.io/github/issues-raw/mkenney/docker-composer.svg)](https://github.com/mkenney/docker-composer/issues) [![Github pull requests](https://img.shields.io/github/issues-pr/mkenney/docker-composer.svg)](https://github.com/mkenney/docker-composer/pulls)
 
-* [latest](https://github.com/mkenney/docker-composer/blob/master/Dockerfile), [php7](https://github.com/mkenney/docker-composer/blob/master/Dockerfile)
+Portable `composer` dev and build tool.
 
-  ![build status](https://travis-ci.org/mkenney/docker-composer.svg?branch=master) [![PHP v7](https://img.shields.io/badge/PHP-v7.0.11-8892bf.svg) ![Composer v1](https://img.shields.io/badge/composer-v1.1.2-orange.svg)](https://github.com/mkenney/docker-composer)
+### Tagged Images
 
-* [php5](https://github.com/mkenney/docker-composer/blob/php5/Dockerfile)
+Images are tagged according to the installed PHP version.Please [let me know](https://github.com/mkenney/docker-composer/issues) if you need a particular version tagged.
 
-  ![build status](https://travis-ci.org/mkenney/docker-composer.svg?branch=php5) [![PHP v5](https://img.shields.io/badge/PHP-v5.6.26-8892bf.svg) ![Composer v1](https://img.shields.io/badge/composer-v1.1.2-orange.svg)](https://github.com/mkenney/docker-composer/tree/php5)
+#### [`latest` Dockerfile](https://github.com/mkenney/docker-composer/blob/master/latest/Dockerfile)
 
-## Synopsys
+Based on [`php:7-cli-alpine`](https://hub.docker.com/r/library/php/). This image should be considered under development and may not be as stable as versioned images.
 
-Essentially, this is just a shell script that manages a very small (34MB) `composer` docker image. The combination of the shell script and docker image allows `composer` to run as either the current user (you) or the owner/group of the current directory.
+#### [`php7` Dockerfile](https://github.com/mkenney/docker-composer/blob/master/php7/Dockerfile)
+
+Based on [`php:7-cli-alpine`](https://hub.docker.com/r/library/php/).
+
+#### [`php7.0` Dockerfile](https://github.com/mkenney/docker-composer/blob/master/php7.0/Dockerfile)
+
+Based on [`php:7.0-cli-alpine`](https://hub.docker.com/r/library/php/). This is the last version with mcrypt available.
+
+#### [`php5` Dockerfile](https://github.com/mkenney/docker-composer/blob/master/php5/Dockerfile)
+
+Based on [`php:5-cli-alpine`](https://hub.docker.com/r/library/php/).
 
 ### Installation
 
-This assumes that you already have [Docker](https://www.docker.com) installed. A running `docker` daemon is required.
+Essentially, this is just a [shell script](https://github.com/mkenney/docker-composer/tree/master/bin/composer) that manages a [Composer](https://getcomposer.org/) docker image. The docker image includes a script ([`run-as-user`](https://github.com/mkenney/docker-scripts/tree/master/container)) that allows commands to write files as either the current user or the owner/group of the current directory, which the shell scripts take advantage of to make sure files are created with your preferred permissions rather than root.
 
-Installation is just a matter of putting the [shell script](https://github.com/mkenney/docker-composer/blob/master/bin/composer) somewhere in your path and making it executable. I like to put my scripts in a `bin/` folder in my home directory:
-* PHP 5
-
-  `wget -nv -O ~/bin/composer https://raw.githubusercontent.com/mkenney/docker-composer/php5/bin/composer && chmod 0755 ~/bin/composer`
-
-* PHP 7
-
-  `wget -nv -O ~/bin/composer https://raw.githubusercontent.com/mkenney/docker-composer/master/bin/composer && chmod 0755 ~/bin/composer`
-* `composer self-update`
-
-  The `self-update` command pulls down the latest docker image and then updates the shell script itself. If you don't have write permissions on the shell script you'll get a permissions error, you can run the self-update command with `sudo` if needed.
-
-## About
+### About
 
 The [source repository](https://github.com/mkenney/docker-composer) contains a [shell script](https://github.com/mkenney/docker-composer/blob/php5/bin/composer) that wraps running a docker container to execute [composer](https://getcomposer.org/). The current directory is mounted into `/src` which is the location the `composer` command will run from. In order to facilitate access to private repositories or use public-key authentication, `$HOME/.ssh` is mounted into the container user's home directory. Any authentication issues that come up can most likely be resolved by modifying your `$HOME/.ssh/config` file.
 
@@ -40,55 +38,29 @@ A wrapper script (`/run-as-user`) is provided in the image that attempts to exec
 
 Because this runs out of a Docker container, all files and directories required by your composer command must be available within the current directory. Specifying files or directories from other locations on the system will not work. For example, `--working-dir=/home/user/folder/` would attempt to use the `/home/user/folder/` path inside the container instead of on the host.
 
-## Source repository
+#### Images & Wrapper Scripts
 
-* [mkenney/docker-composer](https://github.com/mkenney/docker-composer)
+This assumes that you already have [Docker](https://www.docker.com) installed. A running `docker` daemon is required.
 
-## Docker image
+Installation is just a matter of putting the [shell script](https://github.com/mkenney/docker-composer/blob/master/bin/composer) somewhere in your path and making it executable. I like to put my scripts in a `bin/` folder in my home directory:
 
-* [mkenney/composer](https://hub.docker.com/r/mkenney/composer/)
+```
+$ wget -nv -O ~/bin/composer https://raw.githubusercontent.com/mkenney/docker-composer/master/bin/composer
+$ chmod 0755 ~/bin/composer
+```
 
-Based on [alpine 3.3](https://hub.docker.com/_/alpine/). This is simply a php CLI binary built with a few tools required to run `composer` and to do minimal user management in order to run as a user with the same `uid` and `gid` as the current directory.
+The [wrapper script](https://github.com/mkenney/docker-composer/blob/master/bin/composer) defaults to the `php7` tag, but specifying a different tag is easy. You can define the image tag you want to use in your environment which will set the default (you probably want to define this in your `.bashrc` or similar profile script):
+```txt
+export DOCKER_COMPOSER_TAG=php5
+```
 
-## Change log
+or you can easily specify it at runtime whenever necessary, for example:
+```txt
+$ DOCKER_COMPOSER_TAG=php5 composer install
+```
 
-### 2016-10-28
+If you would to see like additional modules, tags, and/or wrapper scripts added to this project please feel free to [create an issue](https://github.com/mkenney/docker-composer/issues) or [open a pull request](https://github.com/mkenney/docker-composer/pull/new/master).
 
-* Switched to the official PHP alpine images
-* Updated shell script for wider compatibility
+* `composer self-update`
 
-### 2016-10-07
-
-* updated the software version badges in this document with current information
-* updated the `bin/composer` wrapper script
-* added a `travis-ci` test to validate [this issue](https://github.com/mkenney/docker-composer/issues/2)
-
-### 2016-09-08
-
-I removed the `root` group from the dev user, it was interfering with the `run-as-user` script
-
-### 2016-09-08
-
-I fixed an upstream error with the script wrapper (the `shadow` package was moved to another repository).
-
-### 2016-07-16
-
-I have re-structured automated the Docker Hub builds, they are no longer triggered by GitHub pushes. Instead they are triggered by a deployment script that is executed on successful `travis-ci` builds. This way, even if builds are failing the image on DockerHub should remain the last stable image at all times.
-
-There may be an issue with API call throttling on the Docker Hub side, if that seems to be happening I'll dig in further.
-
-Please [let me know](https://github.com/mkenney/docker-composer/issues) if you have any problems.
-
-### 2016-06-06
-
-I removed the `as-user` and `composer-wrapper` scripts and put them in a [separate repo](https://github.com/mkenney/docker-scripts/tree/master/container) to reduce duplicate code. [Let me know](https://github.com/mkenney/docker-composer/issues) if you have any trouble.
-
-### 2016-06-03
-
-I modified the `/as-user` command wrapper to check for a valid mounted `~/.ssh` directory. If one exists and it wasn't created by the volume flag in the wrapper script (it's not owned by root) then composer will run as that user, otherwise it will run as the project directory owner.
-
-This fixes a public-key authentication issue when the project directory is not owned by the user running the wrapper script. It will not, however, address issues with the project directory being writable by the current user, that can be solved by fixing the directory permissions on the host and running the script again.
-
-### 2016-06-02
-
-I changed the base image from [mkenney/php-base](https://hub.docker.com/r/mkenney/php-base/) to [alpine](https://hub.docker.com/_/alpine/) to reduce the image size and because Composer doesn't have many dependencies. This reduced the image size from ~330MB to 34MB. Please [let me know](https://github.com/mkenney/docker-composer/issues) if you have any problems.
+  The `self-update` command pulls down the latest docker image _matching the current image tag_ and updates the shell script itself. If you don't have write permissions on the shell script you'll get a permissions error, you can run the self-update command with `sudo` if needed.
