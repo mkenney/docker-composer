@@ -24,7 +24,7 @@ Based on [`php:7.0-cli-alpine`](https://hub.docker.com/r/library/php/). This is 
 
 #### [`php5` Dockerfile](https://github.com/mkenney/docker-composer/blob/master/php5/Dockerfile)
 
-Based on [`php:7.0-cli-alpine`](https://hub.docker.com/r/library/php/).
+Based on [`php:5-cli-alpine`](https://hub.docker.com/r/library/php/).
 
 ### Installation
 

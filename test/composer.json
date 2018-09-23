@@ -2,6 +2,7 @@
     "name": "mkenney/composer",
     "description": "Basic test for this image",
     "require": {
-        "composer/composer": "*"
+        "composer/composer": "*",
+        "endroid/qrcode": "^3.4"
     }
 }

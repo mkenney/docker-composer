@@ -26,18 +26,18 @@ before_install:
     - cd test
 
 script:
-    - rm -rf vendor/
+    - rm -rf vendor/ && rm -f composer.lock
     - docker run --rm -it -v $(pwd):/src:rw mkenney/composer:ci-build-latest update
-    - docker run --rm -it -v $(pwd):/src:rw mkenney/composer:ci-build-latest require endroid/qrcode
-    - rm -rf vendor/
+    - docker run --rm -it -v $(pwd):/src:rw mkenney/composer:ci-build-latest require symfony/debug
+    - rm -rf vendor/ && rm -f composer.lock
     - docker run --rm -it -v $(pwd):/src:rw mkenney/composer:ci-build-php7 update
-    - docker run --rm -it -v $(pwd):/src:rw mkenney/composer:ci-build-php7 require endroid/qrcode
-    - rm -rf vendor/
+    - docker run --rm -it -v $(pwd):/src:rw mkenney/composer:ci-build-php7 require symfony/debug
+    - rm -rf vendor/ && rm -f composer.lock
     - docker run --rm -it -v $(pwd):/src:rw mkenney/composer:ci-build-php7.0 update
-    - docker run --rm -it -v $(pwd):/src:rw mkenney/composer:ci-build-php7.0 require endroid/qrcode
-    - rm -rf vendor/
+    - docker run --rm -it -v $(pwd):/src:rw mkenney/composer:ci-build-php7.0 require symfony/debug
+    - rm -rf vendor/ && rm -f composer.lock
     - docker run --rm -it -v $(pwd):/src:rw mkenney/composer:ci-build-php5 update
-    - docker run --rm -it -v $(pwd):/src:rw mkenney/composer:ci-build-php5 require endroid/qrcode
+    - docker run --rm -it -v $(pwd):/src:rw mkenney/composer:ci-build-php5 require symfony/debug
 
 after_success:
     - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then cd ../ci && sh ./deploy.sh; fi
